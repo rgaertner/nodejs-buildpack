@@ -2,7 +2,6 @@ package npm
 
 import (
 	"io"
-	"path/filepath"
 	"github.com/cloudfoundry/libbuildpack"
 )
 
@@ -17,13 +16,16 @@ type NPM struct {
 }
 
 func (n *NPM) Build() error {
-	return n.Command.Execute(n.BuildDir, n.Log.Output(), n.Log.Output(), "echo", "'skipping'")
+	args := []string{"'skipping'"}
+	return n.Command.Execute(n.BuildDir, n.Log.Output(), n.Log.Output(), "echo", args...)
 }
 
 func (n *NPM) Rebuild() error {
-	return n.Command.Execute(n.BuildDir, n.Log.Output(), n.Log.Output(), "echo", "'skipping'")
+	args := []string{"'skipping'"}
+	return n.Command.Execute(n.BuildDir, n.Log.Output(), n.Log.Output(), "echo", args...)
 }
 
 func (n *NPM) doBuild() (bool, string, error) {
-	return n.Command.Execute(n.BuildDir, n.Log.Output(), n.Log.Output(), "echo", "'skipping'")
+	args := []string{"'skipping'"}
+	return n.Command.Execute(n.BuildDir, n.Log.Output(), n.Log.Output(), "echo", args...)
 }
