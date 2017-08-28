@@ -29,7 +29,7 @@ func (n *NPM) Build() error {
 
 	n.Log.Info("Installing node modules (%s)", source)
 	npmArgs := []string{"install", "--unsafe-perm", "--userconfig", filepath.Join(n.BuildDir, ".npmrc"), "--cache", filepath.Join(n.BuildDir, ".npm")}
-	return n.Command.Execute(n.BuildDir, n.Log.Output(), n.Log.Output(), "echo", npmArgs...)
+	return n.Command.Execute(n.BuildDir, n.Log.Output(), n.Log.Output(), "npm", npmArgs...)
 }
 
 func (n *NPM) Rebuild() error {
@@ -48,7 +48,7 @@ func (n *NPM) Rebuild() error {
 
 	n.Log.Info("Installing any new modules (%s)", source)
 	npmArgs := []string{"install", "--unsafe-perm", "--userconfig", filepath.Join(n.BuildDir, ".npmrc")}
-	return n.Command.Execute(n.BuildDir, n.Log.Output(), n.Log.Output(), "echo", npmArgs...)
+	return n.Command.Execute(n.BuildDir, n.Log.Output(), n.Log.Output(), "npm", npmArgs...)
 }
 
 func (n *NPM) doBuild() (bool, string, error) {
