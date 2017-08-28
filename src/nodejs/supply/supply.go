@@ -127,33 +127,11 @@ func Run(s *Supplier) error {
 
 	s.ListNodeConfig(os.Environ())
 
-	if err := s.Cache.Initialize(); err != nil {
-		s.Log.Error("Unable to initialize cache: %s", err.Error())
-		return err
-	}
-
-	if err := s.Cache.Restore(); err != nil {
-		s.Log.Error("Unable to restore cache: %s", err.Error())
-		return err
-	}
-
 	defer func() {
 		s.Logfile.Sync()
 		s.WarnUntrackedDependencies()
 		s.WarnMissingDevDeps()
 	}()
-
-	if err := s.BuildDependencies(); err != nil {
-		s.Log.Error("Unable to build dependencies: %s", err.Error())
-		return err
-	}
-
-	if err := s.Cache.Save(); err != nil {
-		s.Log.Error("Unable to save cache: %s", err.Error())
-		return err
-	}
-
-	s.ListDependencies()
 
 	if err := s.Logfile.Sync(); err != nil {
 		s.Log.Error(err.Error())
