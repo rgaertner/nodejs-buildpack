@@ -52,23 +52,5 @@ func (n *NPM) Rebuild() error {
 }
 
 func (n *NPM) doBuild() (bool, string, error) {
-	pkgExists, err := libbuildpack.FileExists(filepath.Join(n.BuildDir, "package.json"))
-	if err != nil {
-		return false, "", err
-	}
-
-	if !pkgExists {
-		n.Log.Info("Skipping (no package.json)")
-		return false, "", nil
-	}
-
-	shrinkwrapExists, err := libbuildpack.FileExists(filepath.Join(n.BuildDir, "npm-shrinkwrap.json"))
-	if err != nil {
-		return false, "", err
-	}
-
-	if shrinkwrapExists {
-		return true, "package.json + shrinkwrap", nil
-	}
-	return true, "package.json", nil
+	return false, "package.json", nil
 }
